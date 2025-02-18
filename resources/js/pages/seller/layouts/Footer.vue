@@ -2,7 +2,7 @@
   <footer class="footer mt-3">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-md-6">{{ new Date().getFullYear() }} © Shopy - Getappui.com</div>
+        <div class="col-md-6">{{ new Date().getFullYear() }} © Ezziy - theWebForces.com</div>
         <div class="col-md-6">
           <div class="text-md-end footer-links d-none d-md-block">
             <a href="javascript: void(0);">About</a>

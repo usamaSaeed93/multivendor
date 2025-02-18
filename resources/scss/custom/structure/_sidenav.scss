@@ -85,7 +85,7 @@ html[data-layout-mode="vertical"] {
 
 //Content Page
 .content-page {
-    margin-left: $menu-width;
+    // margin-left: $menu-width;
     min-height: 100vh;
     position: relative;
     padding: $topbar-height 12px 65px;
@@ -406,7 +406,7 @@ html[data-sidenav-size="sm-hover"] {
 
     // Content Page
     .content-page {
-        margin-left: $menu-width-hover;
+        // margin-left: $menu-width-hover;
     }
 
     .leftside-menu:not(:hover) {

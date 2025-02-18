@@ -4,34 +4,40 @@
             <div class="container-fluid navbar-header d-flex">
 
                 <div class="w-33">
-                    <router-link :to="{name: 'customer.home'}">
+                    <router-link :to="{ name: 'customer.home' }">
 
-                        <Logo/>
+                        <Logo />
 
                     </router-link>
                 </div>
+                <MegaMenu />
+                <div class="topbar-categories" @mouseover="showMegaMenu = true" @mouseleave="showMegaMenu = false">
+
+                </div>
 
                 <div class="w-33 d-flex align-items-center justify-content-center gap-2">
-                    <div class="topbar-item" @click="showChooseAddress">
+                    <!-- <div class="topbar-item" @click="showChooseAddress">
                         <div class="topbar-button w-100 p-1 rounded gap-1">
                             <Icon icon="home_pin" size="sm" />
                             <div v-if="selected_address">
                                 <p class="mb-0 max-lines font-14" style="max-width: 130px">{{
-                                        selected_address.address
-                                    }}</p>
+                                    selected_address.address
+                                }}</p>
                             </div>
                             <div v-else>
                                 <p class="mb-0 font-14">{{ $t('select_an_address') }}</p>
                             </div>
                             <Icon color="primary" icon="expand_more" />
                         </div>
-                    </div>
+                    </div> -->
                     <div class="topbar-item d-none d-lg-flex">
                         <div v-if="!hideSearch">
                             <form class="app-search" v-on:submit.prevent="onSearchDone">
-                                <FormInput v-model="search" :placeholder="$t('search')" name="search" no-spacing noLabel></FormInput>
+                                <FormInput v-model="search" :placeholder="$t('search')" name="search" no-spacing
+                                    noLabel></FormInput>
                                 <Icon class="search-icon" icon="search" size="xs"></Icon>
-                                <Icon :class="[{'d-none': !show_search_cancel}]" class="search-widget-icon-close" enterkeyhint="done" icon="cancel" size="xs" @click="onSearchCancel"></Icon>
+                                <Icon :class="[{ 'd-none': !show_search_cancel }]" class="search-widget-icon-close"
+                                    enterkeyhint="done" icon="cancel" size="xs" @click="onSearchCancel"></Icon>
                             </form>
                         </div>
                     </div>
@@ -40,22 +46,26 @@
                 <div class="w-33 d-flex align-items-center justify-content-end">
                     <div class="d-flex align-items-center justify-content-end gap-2">
                         <div class="dropdown topbar-item">
-                            <div class="topbar-button dropdown-toggle arrow-none hover-effect-circular" @click="goToCart">
+                            <div class="topbar-button dropdown-toggle arrow-none hover-effect-circular"
+                                @click="goToCart">
                                 <i class="fe fe-shopping-cart "></i>
-                                <span v-if="cart_count>0" class="badge bg-danger rounded-circle topbar-item-icon-badge">{{
+                                <span v-if="cart_count > 0"
+                                    class="badge bg-danger rounded-circle topbar-item-icon-badge">{{
                                         cart_count
                                     }}</span>
                             </div>
                         </div>
 
                         <div class="dropdown d-none d-lg-flex topbar-item">
-                            <a aria-expanded="false" aria-haspopup="false" class="topbar-button dropdown-toggle arrow-none  hover-effect-circular" data-bs-toggle="dropdown" href="#" role="button">
+                            <a aria-expanded="false" aria-haspopup="false"
+                                class="topbar-button dropdown-toggle arrow-none  hover-effect-circular"
+                                data-bs-toggle="dropdown" href="#" role="button">
                                 <img :src="selected_language.flag" alt="customer-image" height="16">
                             </a>
                             <div class="dropdown-menu dropdown-menu-animated">
 
                                 <a v-for="language in languages" class="dropdown-item" href="javascript:void(0);"
-                                   @click="setLanguage(language)">
+                                    @click="setLanguage(language)">
                                     <img :src="language.flag" alt="customer-image" class="me-2" height="12">
                                     <span class="align-middle">{{ language.title }}</span>
                                 </a>
@@ -65,9 +75,8 @@
 
                         <div class="dropdown topbar-item">
                             <a aria-expanded="false" aria-haspopup="false"
-                               class="topbar-button dropdown-toggle arrow-none hover-effect-circular"
-                               data-bs-toggle="dropdown"
-                               href="#" role="button" @click="onNotificationShow">
+                                class="topbar-button dropdown-toggle arrow-none hover-effect-circular"
+                                data-bs-toggle="dropdown" href="#" role="button" @click="onNotificationShow">
                                 <i class="fe fe-bell"></i>
                             </a>
                             <div class="dropdown-menu dropdown-menu-end dropdown-lg  dropdown-menu-animated">
@@ -85,8 +94,7 @@
                                     <template v-for="notification in getNotifications">
                                         <div class="py-0 px-2 d-flex align-items-start">
                                             <VItem align-items="center" circular class="p-1-5" color="success"
-                                                   display="flex"
-                                                   soft>
+                                                display="flex" soft>
                                                 <Icon icon="local_mall" size="18"></Icon>
                                             </VItem>
                                             <div class="flex-grow-1 ms-2">
@@ -96,7 +104,7 @@
 
                                                 <span class="font-13">{{ notification.body }}</span>
                                                 <div class="text-end font-12 text-muted">{{
-                                                        getDifferenceDateTimeAgo(notification.created_at)
+                                                    getDifferenceDateTimeAgo(notification.created_at)
                                                     }}
                                                 </div>
                                             </div>
@@ -105,9 +113,9 @@
                                     </template>
 
                                     <span class="d-block cursor-pointer text-center text-primary px-2 py-1">
-                                {{ $t('view_all') }}
-                                <i class="fe fe-arrow-right"></i>
-                            </span>
+                                        {{ $t('view_all') }}
+                                        <i class="fe fe-arrow-right"></i>
+                                    </span>
                                 </PageLoading>
 
                             </div>
@@ -115,24 +123,24 @@
 
 
                         <div class="d-none d-sm-flex topbar-item">
-                            <Tooltip :tooltip="$t(layout.theme??' ')" position="bottom">
-                            <div class="topbar-button   hover-effect-circular" @click="toggleTheme">
-                                    <Icon v-if="layout.theme==='light'" icon="light_mode" msr></Icon>
-                                    <Icon v-if="layout.theme==='dark'" icon="dark_mode" msr></Icon>
-                                    <Icon v-if="layout.theme==='auto'" icon="night_sight_auto" msr></Icon>
-                            </div>
+                            <Tooltip :tooltip="$t(layout.theme ?? ' ')" position="bottom">
+                                <div class="topbar-button   hover-effect-circular" @click="toggleTheme">
+                                    <Icon v-if="layout.theme === 'light'" icon="light_mode" msr></Icon>
+                                    <Icon v-if="layout.theme === 'dark'" icon="dark_mode" msr></Icon>
+                                    <Icon v-if="layout.theme === 'auto'" icon="night_sight_auto" msr></Icon>
+                                </div>
                             </Tooltip>
                         </div>
 
                         <template v-if="customer">
                             <div class="dropdown topbar-item">
                                 <a class="topbar-button w-100 p-1 rounded dropdown-toggle arrow-none d-flex align-items-center gap-1   hover-effect-rounded"
-                                   data-bs-toggle="dropdown" href="#">
-                                    <NetworkImage :src="customer.avatar" noPopup rounded size="32"/>
-                                    <span class="font-16">{{ customer.first_name }} <i class="mdi mdi-chevron-down"></i></span>
+                                    data-bs-toggle="dropdown" href="#">
+                                    <NetworkImage :src="customer.avatar" noPopup rounded size="32" />
+                                    <span class="font-16">{{ customer.first_name }} <i
+                                            class="mdi mdi-chevron-down"></i></span>
                                 </a>
-                                <div
-                                    class="dropdown-menu dropdown-menu-end dropdown-menu-animated topbar-dropdown-menu profile-dropdown"
+                                <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated topbar-dropdown-menu profile-dropdown"
                                     style="width: 200px">
                                     <!--                                    &lt;!&ndash; item&ndash;&gt;-->
                                     <!--                                    <div class="dropdown-header noti-title">-->
@@ -143,47 +151,47 @@
 
                                     <!-- item-->
 
-                                    <router-link :to="{name: 'customer.profile'}" class="dropdown-item notify-item">
-                                        <Icon class="me-2" color="teal" icon="manage_accounts" size="20"/>
+                                    <router-link :to="{ name: 'customer.profile' }" class="dropdown-item notify-item">
+                                        <Icon class="me-2" color="teal" icon="manage_accounts" size="20" />
                                         <span class="text-teal fw-medium">{{ $t('my_account') }}</span>
                                     </router-link>
 
-                                    <hr class="dashed"/>
+                                    <hr class="dashed" />
 
-                                    <router-link :to="{name: 'customer.favorites.index'}" class="dropdown-item">
+                                    <router-link :to="{ name: 'customer.favorites.index' }" class="dropdown-item">
                                         <Icon class="me-2" icon="favorite" size="20" />
                                         <span class="fw-medium">{{ $t('favorites') }}</span>
                                     </router-link>
 
-                                    <router-link :to="{name: 'customer.orders.index'}" class="dropdown-item ">
+                                    <router-link :to="{ name: 'customer.orders.index' }" class="dropdown-item ">
                                         <Icon class="me-2" icon="local_mall" size="20" />
                                         <span class="fw-medium">{{ $t('orders') }}</span>
                                     </router-link>
 
-                                    <router-link :to="{name: 'customer.addresses.index'}" class="dropdown-item">
-                                        <Icon class="me-2" icon="home_pin" size="20"/>
+                                    <router-link :to="{ name: 'customer.addresses.index' }" class="dropdown-item">
+                                        <Icon class="me-2" icon="home_pin" size="20" />
                                         <span class="fw-medium">{{ $t('addresses') }}</span>
                                     </router-link>
 
-                                    <hr class="dashed"/>
+                                    <hr class="dashed" />
 
 
-                                    <router-link :to="{name: 'customer.wallets.index'}" class="dropdown-item">
+                                    <router-link :to="{ name: 'customer.wallets.index' }" class="dropdown-item">
                                         <Icon class="me-2" icon="account_balance_wallet" size="20" />
                                         <span class="fw-medium">{{ $t('wallet') }}</span>
                                     </router-link>
 
 
-                                    <router-link :to="{name: 'customer.loyalty_wallets.index'}" class="dropdown-item">
+                                    <router-link :to="{ name: 'customer.loyalty_wallets.index' }" class="dropdown-item">
                                         <Icon class="me-2" icon="card_membership" size="20" />
                                         <span class="fw-medium">{{ $t('loyalty_wallet') }}</span>
                                     </router-link>
 
-                                    <hr class="dashed"/>
+                                    <hr class="dashed" />
 
                                     <!-- item-->
                                     <div class="dropdown-item notify-item cursor-pointer" @click="logout">
-                                        <Icon class="me-2" color="danger" icon="logout" size="20"/>
+                                        <Icon class="me-2" color="danger" icon="logout" size="20" />
                                         <span class="text-danger fw-medium">{{ $t('logout') }}</span>
                                     </div>
 
@@ -193,7 +201,8 @@
                         <template v-else>
                             <div class="dropdown topbar-item align-items-center">
                                 <div class="nav-link">
-                                    <Button class="px-3" color="primary" radius="pill" variant="fill" @click="goToLogin">{{ $t('login') }}
+                                    <Button class="px-3" color="primary" radius="pill" variant="fill"
+                                        @click="goToLogin">{{ $t('login') }}
                                     </Button>
                                 </div>
                             </div>
@@ -215,8 +224,10 @@
         <VModal v-model="show_choose_address_modal">
             <Card class="mb-0">
                 <CardHeader :title="$t('select_address')" icon="home_pin" type="msr">
-                    <div class="float-end" >
-                        <Icon class="cursor-pointer" icon="refresh" size="20" color="secondary" @click="()=>getAddresses(true)"></Icon>
+                    <div class="float-end">
+                        <Icon class="cursor-pointer" icon="refresh" size="20" color="secondary"
+                            @click="() => getAddresses(true)">
+                        </Icon>
                     </div>
 
                 </CardHeader>
@@ -228,7 +239,7 @@
                             <p class="fw-medium mb-0-5">{{ selected_address.address }}</p>
                             <div class="d-flex justify-content-between">
                                 <p class="mb-0  text-muted">{{ selected_address.city }} - {{
-                                        selected_address.pincode
+                                    selected_address.pincode
                                     }}</p>
                                 <span class="text-muted">{{ $t('selected') }}</span>
                             </div>
@@ -239,7 +250,8 @@
                                 <p class="fw-medium mb-0-5">{{ address.address }}</p>
                                 <div class="d-flex justify-content-between">
                                     <p class="mb-0  text-muted">{{ address.city }} - {{ address.pincode }}</p>
-                                    <span class="text-primary fw-medium font-14 cursor-pointer" @click="selectAddress(address)">{{ $t('select') }}</span>
+                                    <span class="text-primary fw-medium font-14 cursor-pointer"
+                                        @click="selectAddress(address)">{{ $t('select') }}</span>
                                 </div>
                             </div>
 
@@ -260,27 +272,29 @@
 </template>
 
 <script lang="ts">
-import {SimpleBar} from 'simplebar-vue3';
-import {ICustomer} from "@js/types/models/customer";
-import {defineComponent} from 'vue';
-import {changeTheme, getAddressWithSubscribeState, logoutCustomer,} from "@js/services/state/state_helper";
-import {ILayout, useCustomerDataStore, useLayoutStore} from "@js/services/state/states";
+import { SimpleBar } from 'simplebar-vue3';
+import { ICustomer } from "@js/types/models/customer";
+import { defineComponent } from 'vue';
+import { changeTheme, getAddressWithSubscribeState, logoutCustomer, } from "@js/services/state/state_helper";
+import { ILayout, useCustomerDataStore, useLayoutStore } from "@js/services/state/states";
 import UtilMixin from "@js/shared/mixins/UtilMixin";
-import {ICustomerAddress} from "@js/types/models/customer_address";
+import { ICustomerAddress } from "@js/types/models/customer_address";
 import Request from "@js/services/api/request";
-import {IData} from "@js/types/models/data";
-import {customerAPI} from "@js/services/api/request_url";
-import {Components} from "@js/components/components";
+import { IData } from "@js/types/models/data";
+import { customerAPI } from "@js/services/api/request_url";
+import { Components } from "@js/components/components";
 import VModal from "@js/components/VModal.vue";
-import {handleException} from "@js/services/api/handle_exception";
+import { handleException } from "@js/services/api/handle_exception";
 import Logo from "@js/components/Logo.vue";
 import Tooltip from "@js/components/Tooltip.vue";
-import {INotification} from "@js/types/models/notification";
-import {ToastNotification} from "@js/services/toast_notification";
+import { INotification } from "@js/types/models/notification";
+import { ToastNotification } from "@js/services/toast_notification";
 import LanguageSelectMixin from "@js/shared/mixins/LanguageSelectMixin";
+import MegaMenu from './MegaMenu.vue';
+import { ref } from 'vue';
 
 export default defineComponent({
-    components: {Tooltip, Logo, VModal, SimpleBar, ...Components},
+    components: { Tooltip, Logo, VModal, SimpleBar, ...Components, MegaMenu },
     mixins: [UtilMixin, LanguageSelectMixin],
     props: {
         hideSearch: {
@@ -291,7 +305,6 @@ export default defineComponent({
     data() {
         return {
             loading: false,
-
             addresses: null as ICustomerAddress[],
             search: null,
             show_search_cancel: false,
@@ -348,10 +361,10 @@ export default defineComponent({
         },
 
         goToLogin() {
-            this.$router.push({'name': 'customer.login'});
+            this.$router.push({ 'name': 'customer.login' });
         },
         goToCart() {
-            this.$router.push({'name': 'customer.carts.index'});
+            this.$router.push({ 'name': 'customer.carts.index' });
         },
         async logout() {
             try {
@@ -361,7 +374,7 @@ export default defineComponent({
             } finally {
             }
             logoutCustomer();
-            this.$router.push({'name': 'customer.login'});
+            this.$router.push({ 'name': 'customer.login' });
         },
 
         toggleTheme() {
@@ -380,14 +393,14 @@ export default defineComponent({
         onSearchDone() {
             if (this.$route.name == 'customer.search') {
                 let query = this.$route.query;
-                this.$router.replace({query: {...query, q: this.search}, silent: true})
+                this.$router.replace({ query: { ...query, q: this.search }, silent: true })
             } else {
-                this.$router.push({name: 'customer.search', query: {q: this.search}});
+                this.$router.push({ name: 'customer.search', query: { q: this.search } });
             }
         },
         goToAddAddress() {
             this.show_choose_address_modal = false;
-            this.$router.push({name: 'customer.addresses.index'});
+            this.$router.push({ name: 'customer.addresses.index' });
         },
         onSearchCancel() {
             this.search = '';
@@ -502,6 +515,8 @@ export default defineComponent({
     }
 
 });
+const showMegaMenu = ref(true);
+
 </script>
 
 <style scoped>
@@ -510,4 +525,27 @@ export default defineComponent({
     padding-right: 140px;
 }
 
+.navbar-custom {
+    padding-left: 140px;
+    padding-right: 140px;
+}
+
+.topbar-categories {
+    position: relative;
+}
+
+.topbar-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+}
+
+.topbar-button:hover {
+    color: #007bff;
+}
 </style>

@@ -20,9 +20,9 @@
                                         :on-added="images_helper.onFileAdded"
                                         :label="$t('image')"
                                         :on-removed="images_helper.onFileRemoved"
-                                        :validator="fileValidator"
                                         preview-as-list
-                            />
+                                        />
+                                        <!-- :validator="fileValidator" -->
                             <FormValidationError :errors="errors" name="image"></FormValidationError>
 
                             <Row class="mt-3 align-items-center">

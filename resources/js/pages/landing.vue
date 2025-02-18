@@ -38,7 +38,7 @@
 
                 <div class="col-lg-7 col-md-7 text-center">
                     <div class="title-heading">
-                        <h1 class="fw-medium">SHOPY - One Stop Ecommerce Solution</h1>
+                        <h1 class="fw-medium">Ezziy - One Stop Ecommerce Solution</h1>
                         <p class="para-desc text-muted">More than just online ecommerce platform</p>
 
                     </div>

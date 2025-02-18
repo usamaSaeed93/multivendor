@@ -27,7 +27,7 @@ export default {
 
     }, methods: {
         setTitle(title: string) {
-            document.title = title + " | shopy";
+            document.title = title + " | Ezziy";
         },
         $t(text: string) {
             const autoTrans = () => {

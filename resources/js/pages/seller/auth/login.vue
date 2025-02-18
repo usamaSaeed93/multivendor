@@ -1,110 +1,97 @@
 <template>
     <div class="auth-wrapper">
         <div class="auth-image-wrapper">
-            <img alt="" class="img-fluid" src="/assets/images/landing/hero.png"/>
+            <img alt="" class="img-fluid" src="/assets/images/landing/hero.png" />
         </div>
 
         <div class="auth-content-wrapper">
             <div class="auth-content">
-                <div class="d-flex justify-content-between align-items-center logo"
-                     style="padding: 40px 40px 0 40px">
-                    <img alt="" class="dark" height="38" src="/assets/images/logo/light.svg">
-                    <img alt="" class="light" height="38" src="/assets/images/logo/dark.svg">
-                    <router-link :to="{name: 'seller.shops.self_registration'}">
+                <div class="d-flex justify-content-between align-items-center logo" style="padding: 40px 40px 0 40px">
+                    <img alt="" class="dark" height="38" src="/assets/images/logo/logo.png">
+                    <img alt="" class="light" height="38" src="/assets/images/logo/logo.png">
+                    <router-link :to="{ name: 'seller.shops.self_registration' }">
                         <Button class="px-2-5 fw-medium" color="bluish-purple" variant="soft">
                             {{ $t('store_registration') }}
                         </Button>
                     </router-link>
                 </div>
-                <div class="flex-grow-1 d-flex flex-column justify-content-center"
-                 style="padding: 32px 60px">
-                <h2 class="text-center text-capitalize fw-semibold mt-0">{{ $t('login') }}</h2>
-                <p class="text-muted text-center mt-1">Seller need to enter a email and password to access.</p>
+                <div class="flex-grow-1 d-flex flex-column justify-content-center" style="padding: 32px 60px">
+                    <h2 class="text-center text-capitalize fw-semibold mt-0">{{ $t('login') }}</h2>
+                    <p class="text-muted text-center mt-1">Seller need to enter a email and password to access.</p>
 
-                <div class="mt-4">
+                    <div class="mt-4">
 
-                    <FormInput v-if="using_email" v-model="email"
-                               :errors="errors"
-                               :label="$t('email_address')"
-                               name="email"
-                               required type="email">
-                        <template #prefix>
-                            <Icon icon="mail" size="18"/>
-                        </template>
-                        <template #label-suffix>
-                            <span class="text-primary float-end cursor-pointer" @click="toggleUsingEmail">{{$t('mobile_number')}}</span>
-                        </template>
-                    </FormInput>
+                        <FormInput v-if="using_email" v-model="email" :errors="errors" :label="$t('email_address')"
+                            name="email" required type="email">
+                            <template #prefix>
+                                <Icon icon="mail" size="18" />
+                            </template>
+                            <template #label-suffix>
+                                <span class="text-primary float-end cursor-pointer" @click="toggleUsingEmail">{{
+                                    $t('mobile_number') }}</span>
+                            </template>
+                        </FormInput>
 
-                    <FormInput v-else v-model="mobile_number"
-                               :errors="errors"
-                               :label="$t('mobile_number')"
-                               name="mobile_number"
-                               required type="tel">
-                        <template #prefix>
-                            <Icon icon="phone" size="18"/>
-                        </template>
-                        <template #label-suffix>
-                            <span class="text-primary float-end cursor-pointer" @click="toggleUsingEmail">{{$t('email')}}</span>
-                        </template>
-                    </FormInput>
+                        <FormInput v-else v-model="mobile_number" :errors="errors" :label="$t('mobile_number')"
+                            name="mobile_number" required type="tel">
+                            <template #prefix>
+                                <Icon icon="phone" size="18" />
+                            </template>
+                            <template #label-suffix>
+                                <span class="text-primary float-end cursor-pointer" @click="toggleUsingEmail">{{
+                                    $t('email') }}</span>
+                            </template>
+                        </FormInput>
 
 
-                    <FormPasswordInput v-model="password" :errors="errors" :label="$t('password')"
-                                       name="password" required>
-                        <template #prefix>
-                            <Icon icon="lock" size="18"/>
-                        </template>
-                    </FormPasswordInput>
+                        <FormPasswordInput v-model="password" :errors="errors" :label="$t('password')" name="password"
+                            required>
+                            <template #prefix>
+                                <Icon icon="lock" size="18" />
+                            </template>
+                        </FormPasswordInput>
 
-                    <div class="mt-4" v-if="need_recaptcha">
-                        <VueRecaptcha :sitekey="getSiteKey"
-                                      class="g-recaptcha"
-                                      @expired="onRecaptchaExpired"
-                                      @error="onRecaptchaError"
+                        <div class="mt-4" v-if="need_recaptcha">
+                            <VueRecaptcha :sitekey="getSiteKey" class="g-recaptcha" @expired="onRecaptchaExpired"
+                                @error="onRecaptchaError" @verify="onRecaptchaVerified" />
+                            <FormValidationError :errors="errors" name="recaptcha"></FormValidationError>
 
-                                      @verify="onRecaptchaVerified"/>
-                        <FormValidationError :errors="errors" name="recaptcha"></FormValidationError>
-
-                    </div>
-                    <div class="d-flex mt-3 justify-content-center">
-
-                        <div class="border p-1-5 cursor-pointer rounded d-flex align-items-center"
-                             @click="loginWithGoogle">
-                            <img alt="google sign in" height="22" src="/assets/images/brand/google_login.svg">
-                            <span class="fw-medium ms-1-5">Sign in with Google</span>
                         </div>
-                        <div class="ms-2-5">
-                            <LoadingButton :loading="loading" class="px-2-5 fw-medium py-1-5"
-                                           flexed-icon icon="login"
-                                           icon-size="14" @click="login">
-                                {{ $t('log_in_seller') }}
-                            </LoadingButton>
-                        </div>
-                    </div>
+                        <div class="d-flex mt-3 justify-content-center">
 
-                    <div class="border-dashed border rounded mt-3 p-2-5" v-if="isDemo">
-                        <div class="d-flex align-items-start cursor-pointer">
-                            <div class="flex-grow-1">
-                                <FormSelect :data="dummy_logins" :helper="dummy_login_helper"
-                                            :label="$t('dummy_sellers')"
-                                            :onSelected="onChangeDummyLogin"
-                                            :placeholder="$t('select_login')"
-                                            :selected="dummy_login" no-spacing/>
+                            <div class="border p-1-5 cursor-pointer rounded d-flex align-items-center"
+                                @click="loginWithGoogle">
+                                <img alt="google sign in" height="22" src="/assets/images/brand/google_login.svg">
+                                <span class="fw-medium ms-1-5">Sign in with Google</span>
+                            </div>
+                            <div class="ms-2-5">
+                                <LoadingButton :loading="loading" class="px-2-5 fw-medium py-1-5" flexed-icon
+                                    icon="login" icon-size="14" @click="login">
+                                    {{ $t('log_in_seller') }}
+                                </LoadingButton>
+                            </div>
+                        </div>
+
+                        <div class="border-dashed border rounded mt-3 p-2-5" v-if="isDemo">
+                            <div class="d-flex align-items-start cursor-pointer">
+                                <div class="flex-grow-1">
+                                    <FormSelect :data="dummy_logins" :helper="dummy_login_helper"
+                                        :label="$t('dummy_sellers')" :onSelected="onChangeDummyLogin"
+                                        :placeholder="$t('select_login')" :selected="dummy_login" no-spacing />
+                                </div>
+
                             </div>
 
                         </div>
 
+
                     </div>
-
-
-                </div>
 
                 </div>
                 <hr class="dashed">
                 <div class="p-2-5 pb-3 text-center">
-                <span>Looking for <router-link :to="{name: 'admin.dashboard'}"
-                                               class="fw-medium">Admin panel</router-link> -></span>
+                    <span>Looking for <router-link :to="{ name: 'admin.dashboard' }" class="fw-medium">Admin
+                            panel</router-link> -></span>
                 </div>
             </div>
         </div>
@@ -116,11 +103,11 @@
 <script lang="ts">
 
 
-import {defineComponent} from "vue";
+import { defineComponent } from "vue";
 import Response from "@js/services/api/response";
 import Request from "@js/services/api/request";
 import FormMixin from "@js/shared/mixins/ValidationErrorMixin";
-import {sellerAPI} from "@js/services/api/request_url";
+import { sellerAPI } from "@js/services/api/request_url";
 import Loading from "@js/components/Loading.vue";
 import LoadingButton from "@js/components/buttons/LoadingButton.vue";
 import FormInput from "@js/components/form/FormInput.vue";
@@ -130,15 +117,15 @@ import CardBody from "@js/components/CardBody.vue";
 import Button from "@js/components/buttons/Button.vue";
 import Icon from "@js/components/Icon.vue";
 import FormPasswordInput from "@js/components/form/FormPasswordInput.vue";
-import {VueRecaptcha} from 'vue-recaptcha';
+import { VueRecaptcha } from 'vue-recaptcha';
 import FormValidationError from "@js/components/form/FormValidationError.vue";
-import {BusinessSetting} from "@js/types/models/business_setting";
+import { BusinessSetting } from "@js/types/models/business_setting";
 import FormSelect from "@js/components/form/FormSelect.vue";
-import {useCustomerDataStore, useSellerDataStore} from "@js/services/state/states";
-import {Firebase} from "@js/firebase";
-import {ToastNotification} from "@js/services/toast_notification";
-import {handleException} from "@js/services/api/handle_exception";
-import {setLightTheme} from "@js/services/theme_service";
+import { useCustomerDataStore, useSellerDataStore } from "@js/services/state/states";
+import { Firebase } from "@js/firebase";
+import { ToastNotification } from "@js/services/toast_notification";
+import { handleException } from "@js/services/api/handle_exception";
+import { setLightTheme } from "@js/services/theme_service";
 
 
 export default defineComponent({
@@ -158,23 +145,23 @@ export default defineComponent({
     mixins: [FormMixin, UtilMixin],
     data() {
         return {
-                dummy_login: null as {
-                    email: string,
-                    password: string
-                },
-                email: '',
-                mobile_number: '',
-                password: '',
-                loading: false,
-                fcm_token: null,
-                using_email: true,
-                need_recaptcha: true,
-                recaptcha_verified: false
+            dummy_login: null as {
+                email: string,
+                password: string
+            },
+            email: '',
+            mobile_number: '',
+            password: '',
+            loading: false,
+            fcm_token: null,
+            using_email: true,
+            need_recaptcha: true,
+            recaptcha_verified: false
 
-            }
-        },
+        }
+    },
     computed: {
-        isDemo(){
+        isDemo() {
             return BusinessSetting.getInstance().demo;
         },
         getSiteKey() {
@@ -269,7 +256,7 @@ export default defineComponent({
                 if (redirectTo != null) {
                     this.$router.replace(redirectTo);
                 } else {
-                    this.$router.replace({name: 'seller.dashboard'});
+                    this.$router.replace({ name: 'seller.dashboard' });
                 }
 
             } catch (error: any) {
@@ -306,7 +293,7 @@ export default defineComponent({
                 if (redirectTo != null) {
                     this.$router.replace(redirectTo);
                 } else {
-                    this.$router.replace({name: 'seller.dashboard'});
+                    this.$router.replace({ name: 'seller.dashboard' });
                 }
 
             } catch (error: any) {
@@ -315,54 +302,52 @@ export default defineComponent({
                 }
             }
 
-                this.loading = false;
-            },
-            onChangeDummyLogin(e) {
-                if(e!=null){
-                    this.using_email=true;
-                    this.email = this.logins[e].email;
-                    this.password = this.logins[e].password;
-                }
-
-            },
-            onRecaptchaVerified(e) {
-                this.recaptcha_verified = true;
-                this.clearAllError();
-            },
-            onRecaptchaError(e) {
-                this.recaptcha_verified = true;
-                this.clearAllError();
-            },
-            onRecaptchaExpired(e) {
-                this.recaptcha_verified = false;
-                this.addError('recaptcha', this.$t('please_check_recaptcha'));
-            }
+            this.loading = false;
         },
-
-        created() {
-            setLightTheme();
-            Firebase.getFCMToken().then((e) => this.fcm_token = e);
-            if (useSellerDataStore().isLoggedIn()) {
-                const redirectTo = this.$route.query?.redirectTo;
-                if (redirectTo != null) {
-                    this.$router.replace(redirectTo);
-                } else {
-                    this.$router.replace({name: 'seller.dashboard'});
-                }
-                return;
-            }
-            if (!BusinessSetting.instance.recaptcha_enable) {
-                this.need_recaptcha = false;
-                this.recaptcha_verified = true;
+        onChangeDummyLogin(e) {
+            if (e != null) {
+                this.using_email = true;
+                this.email = this.logins[e].email;
+                this.password = this.logins[e].password;
             }
 
+        },
+        onRecaptchaVerified(e) {
+            this.recaptcha_verified = true;
+            this.clearAllError();
+        },
+        onRecaptchaError(e) {
+            this.recaptcha_verified = true;
+            this.clearAllError();
+        },
+        onRecaptchaExpired(e) {
+            this.recaptcha_verified = false;
+            this.addError('recaptcha', this.$t('please_check_recaptcha'));
+        }
+    },
+
+    created() {
+        setLightTheme();
+        Firebase.getFCMToken().then((e) => this.fcm_token = e);
+        if (useSellerDataStore().isLoggedIn()) {
+            const redirectTo = this.$route.query?.redirectTo;
+            if (redirectTo != null) {
+                this.$router.replace(redirectTo);
+            } else {
+                this.$router.replace({ name: 'seller.dashboard' });
+            }
+            return;
+        }
+        if (!BusinessSetting.instance.recaptcha_enable) {
+            this.need_recaptcha = false;
+            this.recaptcha_verified = true;
         }
 
     }
+
+}
 )
 
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

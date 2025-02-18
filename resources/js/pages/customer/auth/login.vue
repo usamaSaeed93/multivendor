@@ -9,8 +9,8 @@
                 <div class="d-flex justify-content-between align-items-center logo"
                      style="padding: 40px 40px 0 40px">
                     <router-link :to="{name: 'customer.home'}">
-                        <img alt="" class="dark" height="38" src="/assets/images/logo/light.svg">
-                        <img alt="" class="light" height="38" src="/assets/images/logo/dark.svg">
+                        <img alt="" class="dark" height="38" src="/assets/images/logo/logo.png">
+                        <img alt="" class="light" height="38" src="/assets/images/logo/logo.png">
                     </router-link>
 
                     <router-link :to="{name: 'customer.register'}">

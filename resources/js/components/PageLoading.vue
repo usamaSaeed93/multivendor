@@ -16,7 +16,7 @@ import {defineComponent} from "vue";
 import Loading from "@js/components/Loading.vue";
 
 export default defineComponent({
-    components: {Loading},
+    // components: {Loading},
     props: {
         loading: {
             type: Boolean,

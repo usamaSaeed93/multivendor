@@ -5,7 +5,7 @@
 <head>
     <meta content="width=device-width" name="viewport"/>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
-    <title>Shopy</title>
+    <title>Ezziy</title>
 
 </head>
 <body style="font-family: Nunito, sans-serif; font-size: 15px; font-weight: 400;" data-new-gr-c-s-check-loaded="14.1087.0" data-gr-ext-installed="">
@@ -28,7 +28,7 @@
 
         <tr>
             <td style="padding: 24px 24px; text-align: center;" >
-                <a href="{{$otp}}" style="padding: 8px 20px;  outline: none; text-decoration: none; font-size: 16px; letter-spacing: 0.5px; transition: all 0.3s; font-weight: 600; border-radius: 6px; background-color: #2f55d4; border: 1px solid #2f55d4; color: #ffffff;">Reset Password</a>
+                <a href="{{$verify_url }}" style="padding: 8px 20px;  outline: none; text-decoration: none; font-size: 16px; letter-spacing: 0.5px; transition: all 0.3s; font-weight: 600; border-radius: 6px; background-color: #2f55d4; border: 1px solid #2f55d4; color: #ffffff;">Reset Password</a>
             </td>
         </tr>
 
@@ -40,13 +40,13 @@
 
         <tr style="text-align: end">
             <td style="padding: 24px 24px 24px; color: #8492a6;">
-                Shopy <br> Support Team
+                Ezziy <br> Support Team
             </td>
         </tr>
 
         <tr>
             <td style="padding: 16px 8px; color: #001b44; background-color: #f2f5ff; text-align: center; font-weight: 600">
-                © <script type="text/javascript">document.write(new Date().getFullYear())</script> Shopy
+                © <script type="text/javascript">document.write(new Date().getFullYear())</script> Ezziy
             </td>
         </tr>
         </tbody>

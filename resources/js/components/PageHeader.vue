@@ -90,7 +90,7 @@ export default defineComponent({
                 return [];
             return [
                 ...[{
-                    text: 'Shopy',
+                    text: 'Ezziy',
 
                 }],
                 ...this.items

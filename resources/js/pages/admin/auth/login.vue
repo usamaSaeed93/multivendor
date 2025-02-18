@@ -9,8 +9,8 @@
             <div class="auth-content">
                 <div class="d-flex justify-content-between align-items-center logo"
                      style="padding: 40px 40px 0 40px">
-                    <img alt="" class="dark" height="38" src="/assets/images/logo/light.svg">
-                    <img alt="" class="light" height="38" src="/assets/images/logo/dark.svg">
+                    <img alt="" class="dark" height="38" src="/assets/images/logo/logo.png">
+                    <img alt="" class="light" height="38" src="/assets/images/logo/logo.png">
                     <router-link :to="{name: 'seller.dashboard'}">
                         <Button class="px-2-5 fw-medium" color="bluish-purple" variant="soft">{{ $t('seller_panel') }}
 

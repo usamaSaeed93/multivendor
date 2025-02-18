@@ -54,25 +54,31 @@ class CustomerController extends Controller
         if (env('DEMO', false) && env('DEMO_MAX_CUSTOMER_ID', 0) >= $id) {
             return CResponse::demoCreateNewError('customer');
         }
+    
         $customer = Customer::findOrFail($id);
-        $data = [...$customer->toArray(), ...$request->all(),];
+        $data = [...$customer->toArray(), ...$request->all()];
         $validated_data = CValidator::validate($data, Customer::rules($id));
+    
         $customer->fill($validated_data);
         $customer->saveAvatarImage($request);
+    
         if ($request->get('password') !== null) {
             $customer->password = Hash::make($request->get('password'));
         }
-        if ($request->get('set_as_email_verified') !== null) {
-            $customer->email_verified_at = $request->get('set_as_email_verified') ? now() : null;
+    
+        // ✅ Fix: Match frontend parameter names
+        if ($request->has('email_verified_at')) {
+            $customer->email_verified_at = $request->get('email_verified_at') ? now() : null;
         }
-        if ($request->get('set_as_mobile_number_verified') !== null) {
-            $customer->mobile_number_verified_at = $request->get('set_as_mobile_number_verified') ? now() : null;
+    
+        if ($request->has('mobile_number_verified_at')) {
+            $customer->mobile_number_verified_at = $request->get('mobile_number_verified_at') ? now() : null;
         }
-
+    
         $customer->save();
         return CResponse::success();
     }
-
+    
     public function remove_avatar(Request $request, $id): Application|ResponseFactory|Response
     {
         $customer = Customer::findOrFail($id);

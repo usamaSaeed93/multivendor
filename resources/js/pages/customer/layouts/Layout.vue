@@ -1,19 +1,15 @@
 <template>
     <div id="wrapper">
-
-        <TopBar :hide-search="hideSearch"/>
-
-
-
+        <TopBar :hide-search="hideSearch" />
         <div class="content-page  mt-3">
             <div class="content">
                 <div class="container-fluid">
-                    <slot/>
+                    <slot />
                 </div>
             </div>
 
         </div>
-        <Footer/>
+        <Footer />
     </div>
 </template>
 
@@ -21,23 +17,23 @@
 
 
 import TopBar from "./TopBar.vue";
-import {defineComponent} from "vue";
+import { defineComponent } from "vue";
 import {
     ILayout, useCustomerDataStore,
 
     useLayoutStore
 } from "@js/services/state/states";
-import {IModule, Module} from "@js/types/models/module";
+import { IModule, Module } from "@js/types/models/module";
 import Icon from "@js/components/Icon.vue";
 import VItem from "@js/components/VItem.vue";
 import Request from "@js/services/api/request";
-import {IData} from "@js/types/models/data";
-import {customerAPI} from "@js/services/api/request_url";
-import {handleException} from "@js/services/api/handle_exception";
+import { IData } from "@js/types/models/data";
+import { customerAPI } from "@js/services/api/request_url";
+import { handleException } from "@js/services/api/handle_exception";
 import Footer from "@js/components/Footer.vue";
 
 export default defineComponent({
-    components: {Footer, VItem, Icon, TopBar},
+    components: { Footer, VItem, Icon, TopBar },
     props: {
         hideSearch: {
             type: Boolean,
@@ -130,7 +126,7 @@ export default defineComponent({
 
 
     },
-    created(){
+    created() {
         this.getInitData();
     }
 
@@ -139,8 +135,8 @@ export default defineComponent({
 
 <style scoped>
 .content-page {
-    margin-left: 120px;
-    margin-right: 120px;
+    margin-left: 25px;
+    margin-right: 25px;
     margin-top: 24px;
     padding-left: 0px !important;
 }
@@ -148,5 +144,4 @@ export default defineComponent({
 .collapsed span {
     visibility: hidden;
 }
-
 </style>

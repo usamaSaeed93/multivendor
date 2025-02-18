@@ -8,8 +8,8 @@
             <div class="auth-content">
             <div class="d-flex justify-content-between align-items-center logo"
                  style="padding: 40px 40px 0 40px">
-                <img alt="" height="38" src="/assets/images/logo/light.svg"  class="dark">
-                <img alt="" height="38" src="/assets/images/logo/dark.svg"  class="light">
+                <img alt="" height="38" src="/assets/images/logo/logo.png"  class="dark">
+                <img alt="" height="38" src="/assets/images/logo/logo.png"  class="light">
                 <router-link :to="{name: 'customer.login'}">
                     <Button class="px-2-5 fw-medium" color="bluish-purple" variant="soft">{{ $t('login') }}
                     </Button>
