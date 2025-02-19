@@ -191,9 +191,8 @@
 
                         </div>
                     </div>
-
                     <h2 class="accordion-header p-0">
-                        <div class="accordion-button p-0 shadow-none arrow-none d-flex
+                        <!-- <div class="accordion-button p-0 shadow-none arrow-none d-flex
                             justify-content-end align-items-center gap-3 cursor-pointer"
                             data-bs-target="#module-selector-accordion" data-bs-toggle="collapse">
                             <span class="font-17 text-white text-uppercase fw-medium">{{
@@ -202,8 +201,7 @@
                             <div class="mb-1 p-2-5  rounded-circle bg-card shadow-lg border border-primary">
                                 <img :alt="selected_module.title" :src="selected_module.image" width="36">
                             </div>
-                            <!--                                <img :alt="selected_module.title" :src="selected_module.image" width="34">-->
-                        </div>
+                        </div> -->
                     </h2>
                 </div>
             </div>

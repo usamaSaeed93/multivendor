@@ -56,7 +56,7 @@
                             </div>
                         </div>
 
-                        <div class="dropdown d-none d-lg-flex topbar-item">
+                        <!-- <div class="dropdown d-none d-lg-flex topbar-item">
                             <a aria-expanded="false" aria-haspopup="false"
                                 class="topbar-button dropdown-toggle arrow-none  hover-effect-circular"
                                 data-bs-toggle="dropdown" href="#" role="button">
@@ -71,7 +71,7 @@
                                 </a>
 
                             </div>
-                        </div>
+                        </div> -->
 
                         <div class="dropdown topbar-item">
                             <a aria-expanded="false" aria-haspopup="false"
@@ -122,7 +122,7 @@
                         </div>
 
 
-                        <div class="d-none d-sm-flex topbar-item">
+                        <!-- <div class="d-none d-sm-flex topbar-item">
                             <Tooltip :tooltip="$t(layout.theme ?? ' ')" position="bottom">
                                 <div class="topbar-button   hover-effect-circular" @click="toggleTheme">
                                     <Icon v-if="layout.theme === 'light'" icon="light_mode" msr></Icon>
@@ -130,7 +130,7 @@
                                     <Icon v-if="layout.theme === 'auto'" icon="night_sight_auto" msr></Icon>
                                 </div>
                             </Tooltip>
-                        </div>
+                        </div> -->
 
                         <template v-if="customer">
                             <div class="dropdown topbar-item">

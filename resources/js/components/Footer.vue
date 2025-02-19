@@ -101,7 +101,7 @@
                             <h3 class="text-white mb-3 mt-0">Newsletter</h3>
                             <p class="text-white">Subscribe and receive the latest tips via email.</p>
                         </div>
-                        <Row>
+                        <!-- <Row>
                             <Col lg="12">
                             <div class="foot-subscribe mb-3">
                                 <input class="form-control border bg-transparent" v-model="email" name="email"
@@ -111,16 +111,16 @@
                                 </Button>
                             </div>
                             </Col>
-                        </Row>
+                        </Row> -->
 
-                        <div class="d-flex flex-wrap gap-1 mt-3 justify-content-center">
+                        <!-- <div class="d-flex flex-wrap gap-1 mt-3 justify-content-center">
                             <a :href="setup.customer_android_app_url" class="logo-footer" target="_blank">
                                 <img alt="" height="44" src="/assets/images/landing/play-store.png">
                             </a>
                             <a :href="setup.customer_ios_app_url" class="logo-footer" target="_blank">
                                 <img alt="" height="44" src="/assets/images/landing/app-store.png">
                             </a>
-                        </div>
+                        </div> -->
 
                     </div>
                     <!--end col-->
@@ -142,8 +142,8 @@
 
                         <div class="col-sm-6 mt-4 mt-sm-0 pt-2 pt-sm-0">
                             <div class="list-unstyled text-sm-end mb-0">
-                                <img alt="" class="avatar avatar-ex-sm" src="/assets/images/landing/payment-method.png"
-                                    title="Payments">
+                                <!-- <img alt="" class="avatar avatar-ex-sm" src="/assets/images/landing/payment-method.png"
+                                    title="Payments"> -->
 
                             </div>
                         </div>
