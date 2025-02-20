@@ -9,8 +9,8 @@ import {
 
 export default class Request {
 
-    static BASE_URL = 'http://13.203.183.89/api/v1/';
-    // static BASE_URL = '/api/v1/';
+    // static BASE_URL = 'http://13.203.183.89/api/v1/';
+    static BASE_URL = '/api/v1/';
 
     static async get<T = any>(url: string, config?: AxiosRequestConfig) {
         await this.sleep();
