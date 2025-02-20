@@ -14,6 +14,7 @@ RUN apt-get update && apt-get install -y \
     libpng-dev \
     libjpeg-dev \
     libfreetype6-dev \
+    npm \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install pdo_mysql mysqli zip gd
 
@@ -23,25 +24,22 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # Set working directory
 WORKDIR /var/www
 
+# Copy the entire project first to ensure package.json is available
+COPY . .
+
 # Set git safe directory
 RUN git config --global --add safe.directory /var/www
 
-# Copy composer files first to leverage Docker cache
-COPY composer.json composer.lock ./
+# Install PHP dependencies
+RUN composer install --no-dev --optimize-autoloader
 
-# Install dependencies without running scripts or autoloader
-RUN composer install --no-scripts --no-autoloader --ignore-platform-reqs
-
-# Copy the rest of the application
-COPY . .
-
-# Generate autoloader and run scripts
-RUN composer dump-autoload --optimize && \
-    composer run-script post-install-cmd
+# Install Node.js dependencies & build frontend
+RUN npm install -g yarn && yarn install && yarn production
 
 # Set permissions
 RUN chmod -R 777 storage bootstrap/cache
 
+# Create storage symlink
 RUN php artisan storage:link
 
 # Expose port for Laravel
