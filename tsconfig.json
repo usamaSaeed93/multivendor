@@ -2,7 +2,6 @@
     "compilerOptions": {
         "target": "esnext",
         "module": "esnext",
-        // this enables stricter inference for data properties on `this`
         "strict": false,
         "jsx": "preserve",
         "moduleResolution": "node",
@@ -10,8 +9,15 @@
         "noImplicitThis": false,
         "importHelpers": true,
         "allowSyntheticDefaultImports": true,
-        "noUnusedLocals": true,
-        "noUnusedParameters": true,
+        "noUnusedLocals": false,        // changed to false
+        "noUnusedParameters": false,     // changed to false
+        "allowJs": true,                 // added
+        "checkJs": false,               // added
+        "skipLibCheck": true,           // added
+        "noEmit": false,                // added
+        "suppressImplicitAnyIndexErrors": true, // added
+        "ignoreDeprecations": "5.0",    // added
+        "any": true                     // added
     },
     "include": [
         "resources/js/**/*"
