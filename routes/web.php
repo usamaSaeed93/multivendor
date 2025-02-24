@@ -34,7 +34,7 @@ Route::get('payments/success/', function () {
     return view('payment_success');
 })->name('payments.success');
 
-Route::get('/{any?}', function () {
-    return view('welcome')->with(['business_settings' => (new StrictBusinessSettingResource(BusinessSetting::getInstance()))->toJson()]);
-})->where('any', '^(?!api\/)[\/\w\.-]*');
+// Route::get('/{any?}', function () {
+//     return view('welcome')->with(['business_settings' => (new StrictBusinessSettingResource(BusinessSetting::getInstance()))->toJson()]);
+// })->where('any', '^(?!api\/)[\/\w\.-]*');
 
